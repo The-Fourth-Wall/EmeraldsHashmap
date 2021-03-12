@@ -40,5 +40,9 @@ int main(void) {
     hsum = hashmap_reduce(positive_double_hashmap, (hashmap_lambda)adder, VALUES);
     printf("HASH SUM: `%ld` should be `42`\n\n", (long)hsum);
 
+    hashmap_free(testh);
+    hashmap_free(double_hashmap);
+    hashmap_free(positive_double_hashmap);
+
     return 0;
 }

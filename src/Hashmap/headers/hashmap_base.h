@@ -130,4 +130,11 @@ void hashmap_delete(hashmap *map, char *key);
  **/
 size_t hashmap_length(hashmap *map);
 
+/**
+ * @func: hashmap_free
+ * @brief Frees the memory out of the hashmap
+ * @param map -> The hashmap to free
+ */
+void hashmap_free(hashmap *map);
+
 #endif

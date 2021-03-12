@@ -259,3 +259,10 @@ size_t hashmap_length(hashmap *map) {
 	if(map != NULL) return map->length;
 	else return 0;
 }
+
+void hashmap_free(hashmap *map) {
+    free(map->data->key);
+    free(map->data->data);
+    free(map->data);
+    free(map);
+}
