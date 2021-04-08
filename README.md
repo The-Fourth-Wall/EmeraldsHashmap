@@ -7,7 +7,9 @@ A hashmap implementation using the Robert Jenkins' 32 bit mix function with Knut
 * Install the library
 
 `em list`
+
 `em install`
+
 `em build lib`
 
 ## Usage
