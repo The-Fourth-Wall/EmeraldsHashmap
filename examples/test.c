@@ -15,8 +15,6 @@ int adder(int accumulator, int current) {
 int main(void) {
     hashmap *testh = hashmap_new();
     void *null_value = NULL;
-    hashmap *double_hashmap = NULL;
-    hashmap *positive_double_hashmap = NULL;
     void *hsum;
 
     hashmap_add(testh, "1", (void*)-11);
@@ -35,14 +33,12 @@ int main(void) {
     else printf("its not null\n");
 
     printf("TESTING HASH MAP FILTER REDUCE\n");
-    double_hashmap = hashmap_map(testh, (hashmap_lambda)double_item, VALUES);
-    positive_double_hashmap = hashmap_filter(double_hashmap, (hashmap_lambda)positive_filter, VALUES);
-    hsum = hashmap_reduce(positive_double_hashmap, (hashmap_lambda)adder, VALUES);
+    testh = hashmap_map(testh, (hashmap_lambda)double_item, VALUES);
+    testh = hashmap_filter(testh, (hashmap_lambda)positive_filter, VALUES);
+    hsum = hashmap_reduce(testh, (hashmap_lambda)adder, VALUES);
     printf("HASH SUM: `%ld` should be `42`\n\n", (long)hsum);
 
     hashmap_free(testh);
-    hashmap_free(double_hashmap);
-    hashmap_free(positive_double_hashmap);
 
     return 0;
 }
