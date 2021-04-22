@@ -165,7 +165,7 @@ hashmap *hashmap_new(void) {
 }
 
 void hashmap_add(hashmap *map, char *key, void *value) {
-    signed long long index;
+    signed long index;
 
     if(map == NULL || key == NULL) return;
 
