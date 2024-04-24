@@ -4,7 +4,7 @@ A hashmap implementation using the Robert Jenkins' 32 bit mix function with Knut
 
 # Installation
 
-* Install the library
+- Install the library
 
 `em list`
 
@@ -14,29 +14,30 @@ A hashmap implementation using the Robert Jenkins' 32 bit mix function with Knut
 
 ## Usage
 
-* Include in a file
+- Include in a file
 
 `touch test.c`
+
 ```c
 #include "export/Hashmap.h"
 int main(void) {
-    hashmap *h = hashmap_new();
+  hashmap *h = hashmap_new();
 
-    hashmap_add(h, "one", (void*)1);
-    hashmap_add(h, "value", (void*)"value");
+  hashmap_add(h, "one", (void*)1);
+  hashmap_add(h, "value", (void*)"value");
 
-    printf("%s\n", (char*)hashmap_get(h, "value"));
-    printf("%ld\n", (long)hashmap_get(h, "one"));
+  printf("%s\n", (char*)hashmap_get(h, "value"));
+  printf("%ld\n", (long)hashmap_get(h, "one"));
 }
 ```
 
-* Compile
+- Compile
 
 `clang test.c export/*.*o`
 
 ## Development
 
-* Write tests
+- Write tests
 
 ## Contributing
 

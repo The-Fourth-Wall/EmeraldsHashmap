@@ -14,8 +14,8 @@ static const size_t max_chain_length = 8;
  * @desc: Defines an enum of KEYS or VALUES
  **/
 enum hashmap_element_type {
-	KEYS,
-	VALUES
+  KEYS,
+  VALUES
 };
 
 /**
@@ -26,9 +26,9 @@ enum hashmap_element_type {
  * @param map_use -> Boolean used for hashmap operations and linear probing
  **/
 struct hashmap_element {
-	char *key;
-	void *data;
-	size_t in_use;
+  char *key;
+  void *data;
+  size_t in_use;
 };
 
 /**
@@ -40,9 +40,9 @@ struct hashmap_element {
  * @param data -> The data array contained
  **/
 typedef struct hashmap {
-	size_t alloced;
-	size_t length;
-	struct hashmap_element *data;
+  size_t alloced;
+  size_t length;
+  struct hashmap_element *data;
 } hashmap;
 
 /* Return a 32-bit CRC of the contents of the buffer. */

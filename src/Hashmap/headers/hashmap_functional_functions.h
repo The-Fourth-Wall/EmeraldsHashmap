@@ -12,7 +12,9 @@
 /* The param void* can have more than 1 argument stored as a list of some sort */
 /* Since this is completely generic we can't check for validity of arguments */
 /* The validity of the function is dependent on the callee */
-typedef void* (*hashmap_lambda)();
+typedef void* (*hashmap_lambda0)(void);
+typedef void* (*hashmap_lambda1)(void*);
+typedef void* (*hashmap_lambda2)(void*, void*);
 
 /**
  * @func: hashmap_map
@@ -22,7 +24,7 @@ typedef void* (*hashmap_lambda)();
  * @param element_type -> A type signaling whether we operate on keys or values
  * @return The mapped hashmap duplicate
  **/
-hashmap *hashmap_map(hashmap *map, hashmap_lambda modifier, enum hashmap_element_type element_type);
+hashmap *hashmap_map(hashmap *map, hashmap_lambda1 modifier, enum hashmap_element_type element_type);
 
 /**
  * @func: hashmap_filter
@@ -32,7 +34,7 @@ hashmap *hashmap_map(hashmap *map, hashmap_lambda modifier, enum hashmap_element
  * @param element_type -> A type signaling whether we operate on keys or values
  * @return The filtered hashmap duplicate
  **/
-hashmap *hashmap_filter(hashmap *map, hashmap_lambda filter, enum hashmap_element_type element_type);
+hashmap *hashmap_filter(hashmap *map, hashmap_lambda1 filter, enum hashmap_element_type element_type);
 
 /**
  * @func: hashmap_reduce
@@ -42,6 +44,6 @@ hashmap *hashmap_filter(hashmap *map, hashmap_lambda filter, enum hashmap_elemen
  * @param element_type -> A type signaling whether we operate on keys or values
  * @return The folder void* result
  **/
-void *hashmap_reduce(hashmap *map, hashmap_lambda fold, enum hashmap_element_type element_type);
+void *hashmap_reduce(hashmap *map, hashmap_lambda2 fold, enum hashmap_element_type element_type);
 
 #endif
