@@ -1,7 +1,7 @@
 #ifndef __HASHMAP_DUP_H_
 #define __HASHMAP_DUP_H_
 
-#include "hashmap_base.h"
+#include "../hashmap_base/hashmap_base.h"
 
 /**
  * @func: hashmap_dup

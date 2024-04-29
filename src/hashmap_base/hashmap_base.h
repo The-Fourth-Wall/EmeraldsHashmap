@@ -7,16 +7,13 @@
 
 /* Initial capacity of the hashmap */
 static const size_t hashmap_init_capacity = 32;
-static const size_t max_chain_length = 8;
+static const size_t max_chain_length      = 8;
 
 /**
  * @enum: hashmap_element_type
  * @desc: Defines an enum of KEYS or VALUES
  **/
-enum hashmap_element_type {
-  KEYS,
-  VALUES
-};
+enum hashmap_element_type { KEYS, VALUES };
 
 /**
  * @struct: hashmap_element

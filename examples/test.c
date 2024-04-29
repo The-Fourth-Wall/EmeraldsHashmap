@@ -1,19 +1,15 @@
-#include "../export/Hashmap.h"
+#include "../export/Hashmap.h" /* IWYU pragma: keep */
 
-int double_item(int item) {
-  return item * 2;
-}
+#include <stdio.h>
 
-int positive_filter(int item) {
-  return item < 0;
-}
+int double_item(int item) { return item * 2; }
 
-int adder(int accumulator, int current) {
-  return accumulator + current;
-}
+int positive_filter(int item) { return item < 0; }
+
+int adder(int accumulator, int current) { return accumulator + current; }
 
 int main(void) {
-  hashmap *testh = hashmap_new();
+  hashmap *testh   = hashmap_new();
   void *null_value = NULL;
   void *hsum;
 
@@ -29,15 +25,16 @@ int main(void) {
 
   printf("TESTING NON EXISTENT HASHMAP ELEMENT\n");
   null_value = hashmap_get(testh, "1241241");
-  if (null_value == NULL)
+  if(null_value == NULL) {
     printf("its null\n");
-  else
+  } else {
     printf("its not null\n");
+  }
 
   printf("TESTING HASH MAP FILTER REDUCE\n");
   testh = hashmap_map(testh, (hashmap_lambda1)double_item, VALUES);
   testh = hashmap_filter(testh, (hashmap_lambda1)positive_filter, VALUES);
-  hsum = hashmap_reduce(testh, (hashmap_lambda2)adder, VALUES);
+  hsum  = hashmap_reduce(testh, (hashmap_lambda2)adder, VALUES);
   printf("HASH SUM: `%ld` should be `42`\n\n", (long)hsum);
 
   hashmap_free(testh);
