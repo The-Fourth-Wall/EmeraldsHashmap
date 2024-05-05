@@ -9,6 +9,6 @@
  * @param map -> The map to copy
  * @return The duplicate hashmap
  **/
-hashmap *hashmap_dup(hashmap *map);
+EmeraldsHashmap *hashmap_dup(EmeraldsHashmap *map);
 
 #endif

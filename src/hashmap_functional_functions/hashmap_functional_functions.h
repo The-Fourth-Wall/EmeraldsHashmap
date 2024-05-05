@@ -4,7 +4,7 @@
 #include "../hashmap_base/hashmap_base.h"
 
 /**
- * @func: hashmap_lambda
+ * @func: EmeraldsHashmapLambda
  * @desc: A generic function type used upon iterable data structures
  * @param -> An element belonging to an iterable
  * @return -> A value that satisfies the callee's purpose (map, filter, reduce)
@@ -13,9 +13,9 @@
  */
 /* Since this is completely generic we can't check for validity of arguments */
 /* The validity of the function is dependent on the callee */
-typedef void *(*hashmap_lambda0)(void);
-typedef void *(*hashmap_lambda1)(void *);
-typedef void *(*hashmap_lambda2)(void *, void *);
+typedef void *(*EmeraldsHashmapLambda0)(void);
+typedef void *(*EmeraldsHashmapLambda1)(void *);
+typedef void *(*EmeraldsHashmapLambda2)(void *, void *);
 
 /**
  * @func: hashmap_map
@@ -26,8 +26,10 @@ typedef void *(*hashmap_lambda2)(void *, void *);
  * @param element_type -> A type signaling whether we operate on keys or values
  * @return The mapped hashmap duplicate
  **/
-hashmap *hashmap_map(
-  hashmap *map, hashmap_lambda1 modifier, enum hashmap_element_type element_type
+EmeraldsHashmap *hashmap_map(
+  EmeraldsHashmap *map,
+  EmeraldsHashmapLambda1 modifier,
+  enum EmeraldsHashmapElementType element_type
 );
 
 /**
@@ -39,8 +41,10 @@ hashmap *hashmap_map(
  * @param element_type -> A type signaling whether we operate on keys or values
  * @return The filtered hashmap duplicate
  **/
-hashmap *hashmap_filter(
-  hashmap *map, hashmap_lambda1 filter, enum hashmap_element_type element_type
+EmeraldsHashmap *hashmap_filter(
+  EmeraldsHashmap *map,
+  EmeraldsHashmapLambda1 filter,
+  enum EmeraldsHashmapElementType element_type
 );
 
 /**
@@ -53,7 +57,9 @@ hashmap *hashmap_filter(
  * @return The folder void* result
  **/
 void *hashmap_reduce(
-  hashmap *map, hashmap_lambda2 fold, enum hashmap_element_type element_type
+  EmeraldsHashmap *map,
+  EmeraldsHashmapLambda2 fold,
+  enum EmeraldsHashmapElementType element_type
 );
 
 #endif

@@ -1,7 +1,7 @@
 #include "hashmap_dup.h"
 
-hashmap *hashmap_dup(hashmap *map) {
-  hashmap *dup = NULL;
+EmeraldsHashmap *hashmap_dup(EmeraldsHashmap *map) {
+  EmeraldsHashmap *dup = NULL;
   size_t i;
 
   if(map == NULL) {

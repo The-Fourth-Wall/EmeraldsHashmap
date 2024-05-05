@@ -10,37 +10,37 @@ static const size_t hashmap_init_capacity = 32;
 static const size_t max_chain_length      = 8;
 
 /**
- * @enum: hashmap_element_type
- * @desc: Defines an enum of KEYS or VALUES
+ * @enum: EmeraldsHashmapElementType
+ * @desc: Defines an enum of EM_HASH_KEYS or EM_HASH_VALUES
  **/
-enum hashmap_element_type { KEYS, VALUES };
+enum EmeraldsHashmapElementType { EM_HASH_KEYS, EM_HASH_VALUES };
 
 /**
- * @struct: hashmap_element
+ * @struct: EmeraldsHashmapElement
  * @desc: Elements contained in the hashmap both keys and values
  * @param key -> The key of the element
  * @param data -> The value of the element
  * @param map_use -> Boolean used for hashmap operations and linear probing
  **/
-struct hashmap_element {
+struct EmeraldsHashmapElement {
   char *key;
   void *data;
   size_t in_use;
 };
 
 /**
- * @struct: hashmap
+ * @struct: EmeraldsHashmap
  * @desc: A hashmap struct that has some maximum size and
  *          current size as well as the data to hold
  * @param alloced -> The maximum allocated size
  * @param length -> The current total size
  * @param data -> The data array contained
  **/
-typedef struct hashmap {
+typedef struct EmeraldsHashmap {
   size_t alloced;
   size_t length;
-  struct hashmap_element *data;
-} hashmap;
+  struct EmeraldsHashmapElement *data;
+} EmeraldsHashmap;
 
 /* Return a 32-bit CRC of the contents of the buffer. */
 /**
@@ -59,7 +59,7 @@ static unsigned long crc32(const unsigned char *s, unsigned int len);
  * @param keystring -> The string to hash
  * @return A unique hashed int
  **/
-static unsigned int hashmap_hash_int(hashmap *map, char *keystring);
+static unsigned int hashmap_hash_int(EmeraldsHashmap *map, char *keystring);
 
 /**
  * @func: hashmap_hash
@@ -68,21 +68,21 @@ static unsigned int hashmap_hash_int(hashmap *map, char *keystring);
  * @param key -> The key to hash
  * @return The location
  **/
-static size_t hashmap_hash(hashmap *map, char *key);
+static size_t hashmap_hash(EmeraldsHashmap *map, char *key);
 
 /**
  * @func: hashmap_rehash
  * @desc: Doubles the size of the hashmap and rehashes all the elements
  * @param in -> The hashmap to rehash
  **/
-static void hashmap_rehash(hashmap *map);
+static void hashmap_rehash(EmeraldsHashmap *map);
 
 /**
  * @func: hashmap_new
  * @desc: Create an empty hashmap
  * @return: The hashmap
  **/
-hashmap *hashmap_new(void);
+EmeraldsHashmap *hashmap_new(void);
 
 /**
  * @func: hashmap_add
@@ -91,7 +91,7 @@ hashmap *hashmap_new(void);
  * @param key -> The key of the new element
  * @param value -> The value of the new element
  **/
-void hashmap_add(hashmap *map, char *key, void *value);
+void hashmap_add(EmeraldsHashmap *map, char *key, void *value);
 
 /**
  * @func: hashmap_set
@@ -100,7 +100,7 @@ void hashmap_add(hashmap *map, char *key, void *value);
  * @param key -> The key to get the value of
  * @param value -> The item to set to the specific key
  **/
-void hashmap_set(hashmap *map, char *key, void *value);
+void hashmap_set(EmeraldsHashmap *map, char *key, void *value);
 
 /**
  * @func: hashmap_get
@@ -109,7 +109,7 @@ void hashmap_set(hashmap *map, char *key, void *value);
  * @param key -> The key to get the value of
  * @return The value we are searching for
  **/
-void *hashmap_get(hashmap *map, char *key);
+void *hashmap_get(EmeraldsHashmap *map, char *key);
 
 /**
  * @func: hashmap_delete
@@ -117,7 +117,7 @@ void *hashmap_get(hashmap *map, char *key);
  * @param map -> The hashmap to use
  * @param key -> The key of the element to remove
  **/
-void hashmap_delete(hashmap *map, char *key);
+void hashmap_delete(EmeraldsHashmap *map, char *key);
 
 /**
  * @func: hashmap_length
@@ -125,13 +125,13 @@ void hashmap_delete(hashmap *map, char *key);
  * @param map -> The hashmap to use
  * @return The size of the provided hashmap
  **/
-size_t hashmap_length(hashmap *map);
+size_t hashmap_length(EmeraldsHashmap *map);
 
 /**
  * @func: hashmap_free
  * @brief Frees the memory out of the hashmap
  * @param map -> The hashmap to free
  */
-void hashmap_free(hashmap *map);
+void hashmap_free(EmeraldsHashmap *map);
 
 #endif

@@ -71,7 +71,7 @@ static unsigned long crc32(const unsigned char *s, unsigned int len) {
  * @param keystring -> The string to hash
  * @return A unique hashed int
  **/
-static unsigned int hashmap_hash_int(hashmap *map, char *keystring) {
+static unsigned int hashmap_hash_int(EmeraldsHashmap *map, char *keystring) {
   unsigned long key = crc32((unsigned char *)(keystring), strlen(keystring));
 
   /* Robert Jenkins' 32 bit Mix Function */
@@ -97,7 +97,7 @@ static unsigned int hashmap_hash_int(hashmap *map, char *keystring) {
  * @param key -> The key to hash
  * @return The location
  **/
-static size_t hashmap_hash(hashmap *map, char *key) {
+static size_t hashmap_hash(EmeraldsHashmap *map, char *key) {
   size_t curr;
   size_t i;
 
@@ -129,16 +129,16 @@ static size_t hashmap_hash(hashmap *map, char *key) {
  * @desc: Doubles the size of the hashmap and rehashes all the elements
  * @param in -> The hashmap to rehash
  **/
-static void hashmap_rehash(hashmap *map) {
+static void hashmap_rehash(EmeraldsHashmap *map) {
   size_t old_size;
   size_t i;
-  struct hashmap_element *temp = (struct hashmap_element *)calloc(
-    2 * map->alloced, sizeof(struct hashmap_element)
+  struct EmeraldsHashmapElement *temp = (struct EmeraldsHashmapElement *)calloc(
+    2 * map->alloced, sizeof(struct EmeraldsHashmapElement)
   );
 
   /* Update the array */
-  struct hashmap_element *curr = map->data;
-  map->data                    = temp;
+  struct EmeraldsHashmapElement *curr = map->data;
+  map->data                           = temp;
 
   /* Update the size */
   old_size     = map->alloced;
@@ -156,17 +156,17 @@ static void hashmap_rehash(hashmap *map) {
   return;
 }
 
-hashmap *hashmap_new(void) {
-  hashmap *map = (hashmap *)malloc(sizeof(hashmap));
-  map->data    = (struct hashmap_element *)calloc(
-    hashmap_init_capacity, sizeof(struct hashmap_element)
+EmeraldsHashmap *hashmap_new(void) {
+  EmeraldsHashmap *map = (EmeraldsHashmap *)malloc(sizeof(EmeraldsHashmap));
+  map->data            = (struct EmeraldsHashmapElement *)calloc(
+    hashmap_init_capacity, sizeof(struct EmeraldsHashmapElement)
   );
   map->alloced = hashmap_init_capacity;
   map->length  = 0;
   return map;
 }
 
-void hashmap_add(hashmap *map, char *key, void *value) {
+void hashmap_add(EmeraldsHashmap *map, char *key, void *value) {
   signed long index;
 
   if(map == NULL || key == NULL) {
@@ -189,7 +189,7 @@ void hashmap_add(hashmap *map, char *key, void *value) {
   return;
 }
 
-void hashmap_set(hashmap *map, char *key, void *value) {
+void hashmap_set(EmeraldsHashmap *map, char *key, void *value) {
   size_t curr;
   size_t i;
 
@@ -212,7 +212,7 @@ void hashmap_set(hashmap *map, char *key, void *value) {
   return;
 }
 
-void *hashmap_get(hashmap *map, char *key) {
+void *hashmap_get(EmeraldsHashmap *map, char *key) {
   size_t curr;
   size_t i;
 
@@ -235,7 +235,7 @@ void *hashmap_get(hashmap *map, char *key) {
   return NULL;
 }
 
-void hashmap_delete(hashmap *map, char *key) {
+void hashmap_delete(EmeraldsHashmap *map, char *key) {
   size_t curr;
   size_t i;
 
@@ -265,7 +265,7 @@ void hashmap_delete(hashmap *map, char *key) {
   return;
 }
 
-size_t hashmap_length(hashmap *map) {
+size_t hashmap_length(EmeraldsHashmap *map) {
   if(map != NULL) {
     return map->length;
   } else {
@@ -273,7 +273,7 @@ size_t hashmap_length(hashmap *map) {
   }
 }
 
-void hashmap_free(hashmap *map) {
+void hashmap_free(EmeraldsHashmap *map) {
   free(map->data->key);
   free(map->data->data);
   free(map->data);

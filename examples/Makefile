@@ -8,7 +8,7 @@ OUTPUT = a.out
 FLAGS = -Wall -Wextra -Werror -pedantic -pedantic-errors -Wpedantic
 WARNINGS = -Wno-unused-function
 HEADERS =
-LIBS = ../export/*.*o
+LIBS = ../export/*.o
 
 INPUT = $(NAME).c
 

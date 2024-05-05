@@ -1,4 +1,4 @@
-#include "../export/Hashmap.h" /* IWYU pragma: keep */
+#include "../export/EmeraldsHashmap.h" /* IWYU pragma: keep */
 
 #include <stdio.h>
 
@@ -9,8 +9,8 @@ int positive_filter(int item) { return item < 0; }
 int adder(int accumulator, int current) { return accumulator + current; }
 
 int main(void) {
-  hashmap *testh   = hashmap_new();
-  void *null_value = NULL;
+  EmeraldsHashmap *testh = hashmap_new();
+  void *null_value       = NULL;
   void *hsum;
 
   hashmap_add(testh, "1", (void *)-11);
@@ -32,9 +32,12 @@ int main(void) {
   }
 
   printf("TESTING HASH MAP FILTER REDUCE\n");
-  testh = hashmap_map(testh, (hashmap_lambda1)double_item, VALUES);
-  testh = hashmap_filter(testh, (hashmap_lambda1)positive_filter, VALUES);
-  hsum  = hashmap_reduce(testh, (hashmap_lambda2)adder, VALUES);
+  testh =
+    hashmap_map(testh, (EmeraldsHashmapLambda1)double_item, EM_HASH_VALUES);
+  testh = hashmap_filter(
+    testh, (EmeraldsHashmapLambda1)positive_filter, EM_HASH_VALUES
+  );
+  hsum = hashmap_reduce(testh, (EmeraldsHashmapLambda2)adder, EM_HASH_VALUES);
   printf("HASH SUM: `%ld` should be `42`\n\n", (long)hsum);
 
   hashmap_free(testh);

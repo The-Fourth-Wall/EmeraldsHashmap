@@ -1,4 +1,4 @@
-# Hashmap
+# EmeraldsHashmap
 
 A hashmap implementation using the Robert Jenkins' 32 bit mix function with Knuth's multiplicative method for hashing.
 
@@ -19,9 +19,9 @@ A hashmap implementation using the Robert Jenkins' 32 bit mix function with Knut
 `touch test.c`
 
 ```c
-#include "export/Hashmap.h"
+#include "export/EmeraldsHashmap.h"
 int main(void) {
-  hashmap *h = hashmap_new();
+  EmeraldsHashmap *h = hashmap_new();
 
   hashmap_add(h, "one", (void*)1);
   hashmap_add(h, "value", (void*)"value");
@@ -41,7 +41,7 @@ int main(void) {
 
 ## Contributing
 
-1. Fork it (<https://github.com/EmeraldsFramework/Hashmap/fork>)
+1. Fork it (<https://github.com/Oblivious-Oblivious/EmeraldsHashmap/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

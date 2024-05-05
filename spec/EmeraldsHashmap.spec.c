@@ -9,6 +9,4 @@ spec_suite({
   T_hashmap_functional_functions();
 });
 
-int main(void) {
-  run_spec_suite("all");
-}
+int main(void) { run_spec_suite("all"); }

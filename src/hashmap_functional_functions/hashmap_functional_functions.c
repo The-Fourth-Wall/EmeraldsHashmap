@@ -1,7 +1,9 @@
 #include "hashmap_functional_functions.h"
 
-hashmap *hashmap_map(
-  hashmap *map, hashmap_lambda1 modifier, enum hashmap_element_type element_type
+EmeraldsHashmap *hashmap_map(
+  EmeraldsHashmap *map,
+  EmeraldsHashmapLambda1 modifier,
+  enum EmeraldsHashmapElementType element_type
 ) {
   size_t i;
 
@@ -13,11 +15,11 @@ hashmap *hashmap_map(
   for(i = 0; i < map->alloced; i++) {
     if(map->data[i].in_use != 0) {
       switch(element_type) {
-      case KEYS:
+      case EM_HASH_KEYS:
         /* TODO CREATE ACCESSOR METHODS */
         map->data[i].key = modifier(map->data[i].key);
         break;
-      case VALUES:
+      case EM_HASH_VALUES:
         hashmap_set(map, map->data[i].key, modifier(map->data[i].data));
         break;
       default:
@@ -29,8 +31,10 @@ hashmap *hashmap_map(
   return map;
 }
 
-hashmap *hashmap_filter(
-  hashmap *map, hashmap_lambda1 filter, enum hashmap_element_type element_type
+EmeraldsHashmap *hashmap_filter(
+  EmeraldsHashmap *map,
+  EmeraldsHashmapLambda1 filter,
+  enum EmeraldsHashmapElementType element_type
 ) {
   size_t i;
 
@@ -42,7 +46,7 @@ hashmap *hashmap_filter(
   for(i = 0; i < map->alloced; i++) {
     if(map->data[i].in_use != 0) {
       switch(element_type) {
-      case KEYS:
+      case EM_HASH_KEYS:
         /* If the key passes the filter we continue to the next */
         if(!filter(map->data[i].key)) {
           continue;
@@ -51,7 +55,7 @@ hashmap *hashmap_filter(
         /* Delete the element with the specific key from the hashmap */
         hashmap_delete(map, map->data[i].key);
         break;
-      case VALUES:
+      case EM_HASH_VALUES:
         /* If the value passes the filter we continue to the next */
         if(!filter(map->data[i].data)) {
           continue;
@@ -70,7 +74,9 @@ hashmap *hashmap_filter(
 }
 
 void *hashmap_reduce(
-  hashmap *map, hashmap_lambda2 fold, enum hashmap_element_type element_type
+  EmeraldsHashmap *map,
+  EmeraldsHashmapLambda2 fold,
+  enum EmeraldsHashmapElementType element_type
 ) {
   void *accumulator = NULL;
   void *current     = NULL;
@@ -85,11 +91,11 @@ void *hashmap_reduce(
   for(i = 0; i < map->alloced; i++) {
     if(map->data[i].in_use != 0) {
       switch(element_type) {
-      case KEYS:
+      case EM_HASH_KEYS:
         /* Set accumulator to some arbitrary hashmap key */
         accumulator = map->data[i].key;
         break;
-      case VALUES:
+      case EM_HASH_VALUES:
         /* Set accumulator to some arbitrary hashmap value  */
         accumulator = hashmap_get(map, map->data[i].key);
         break;
@@ -108,14 +114,14 @@ void *hashmap_reduce(
         continue;
       }
       switch(element_type) {
-      case KEYS:
+      case EM_HASH_KEYS:
         /* Get the current item */
         current = map->data[i].key;
 
         /* Accumulate the result */
         accumulator = fold(accumulator, current);
         break;
-      case VALUES:
+      case EM_HASH_VALUES:
         /* Get the current item */
         current = hashmap_get(map, map->data[i].key);
 
