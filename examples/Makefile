@@ -5,8 +5,8 @@ OPT = -O2
 VERSION = -std=c89
 OUTPUT = a.out
 
-FLAGS = -Wall -Wextra -Werror -pedantic -pedantic-errors -Wpedantic
-WARNINGS = -Wno-unused-function
+FLAGS = -g -fsanitize=address
+WARNINGS = -Wall -Wextra -Werror -pedantic -pedantic-errors -Wpedantic
 HEADERS =
 LIBS = ../export/*.o
 

@@ -3,10 +3,10 @@
 #include "hashmap_dup/hashmap_dup.module.spec.h"
 #include "hashmap_functional_functions/hashmap_functional_functions.module.spec.h"
 
-spec_suite({
-  T_hashmap_base();
-  T_hashmap_dup();
-  T_hashmap_functional_functions();
-});
-
-int main(void) { run_spec_suite("all"); }
+int main(void) {
+  cspec_run_suite("all", {
+    T_hashmap_base();
+    T_hashmap_dup();
+    T_hashmap_functional_functions();
+  });
+}

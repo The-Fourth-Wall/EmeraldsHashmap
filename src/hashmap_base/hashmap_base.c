@@ -48,8 +48,7 @@ static unsigned long crc32_tab[] = {
 
 /* Return a 32-bit CRC of the contents of the buffer. */
 /**
- * @func: crc32
- * @desc: Gets a 32-bit CEC of the contents of the buffer
+ * @brief Gets a 32-bit CEC of the contents of the buffer
  * @param s -> The key string
  * @param len -> The length of the key string
  * @return The crc32 value of the key string
@@ -65,8 +64,7 @@ static unsigned long crc32(const unsigned char *s, unsigned int len) {
 }
 
 /**
- * @func: hashmap_hash_int
- * @desc: Hashing functions for a string
+ * @brief Hashing functions for a string
  * @param map -> The hashmap we want to modify the table size of
  * @param keystring -> The string to hash
  * @return A unique hashed int
@@ -91,8 +89,7 @@ static unsigned int hashmap_hash_int(EmeraldsHashmap *map, char *keystring) {
 }
 
 /**
- * @func: hashmap_hash
- * @desc: Get the integer of the location in data to store it to the item
+ * @brief Get the integer of the location in data to store it to the item
  * @param in -> The hashmap
  * @param key -> The key to hash
  * @return The location
@@ -125,8 +122,7 @@ static size_t hashmap_hash(EmeraldsHashmap *map, char *key) {
 }
 
 /**
- * @func: hashmap_rehash
- * @desc: Doubles the size of the hashmap and rehashes all the elements
+ * @brief Doubles the size of the hashmap and rehashes all the elements
  * @param in -> The hashmap to rehash
  **/
 static void hashmap_rehash(EmeraldsHashmap *map) {
